@@ -7,8 +7,32 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>demo1..</h1>
-    <input type="button" id="btn" value="打开CMD">
-    <script src="render/index.js"></script>
+    <div class="main-cnt">
+        <div class="block">
+            <h2>请选择环境：</h2>
+            <ul class="root-list">
+                <li class="active">Gbeta1</li>
+                <li>Gbeta2</li>
+                <li>Gbeta3</li>
+                <li>Gbeta4</li>
+                <li>Gbeta5</li>
+            </ul>
+            <input type="hidden" class="root" value="Gbeta1">
+        </div>
+        <div class="block">
+            <h2>请选择模块：</h2>
+            <ul class="module-list">
+                <li class="active">index/index</li>
+                <li>login/login</li>
+                <li>preorder/preorder</li>
+            </ul>
+            <input type="hidden" class="module" value="index/index">
+        </div>
+        <div class="block-btn">
+            <a href="javascript:;" class="start-btn active">启动</a>
+        </div>
+    </div>
+    <link rel="stylesheet" href="renderer/index/index.css">
+    <script src="renderer/index/index.js"></script>
 </body>
 </html>

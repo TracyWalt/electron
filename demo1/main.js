@@ -9,12 +9,16 @@ app.on('ready', () => {
 
     // 创建新窗口
     win = new BrowserWindow({
-        width: 500,
+        width: 1000,
         height: 500,
         webPreferences: {
             nodeIntegration: true,
-        }
+        },
+        // webContents: true,
     })
+
+    //开启渲染进程中的调试模式
+    win.webContents.openDevTools();
 
     // 引入主页面
     win.loadFile('index.html')
