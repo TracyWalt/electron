@@ -8,9 +8,6 @@ let oBtn = document.querySelector('.start-btn')
 let root = document.querySelector('.root')
 let module = document.querySelector('.module')
 
-
-
-
 let moduleList = document.querySelector('.module-list').querySelectorAll('li')
 for (var i = 0; i < moduleList.length; i++) {
     moduleList[i].onclick = function () {
@@ -22,8 +19,8 @@ for (var i = 0; i < moduleList.length; i++) {
     }
 }
 
-
-let rootDir = 'E:/web/'
+// let rootDir = 'E:/web/'
+let rootDir = 'E:/'
 
 
 fs.readdir(rootDir, function (err, files) {
@@ -32,23 +29,20 @@ fs.readdir(rootDir, function (err, files) {
     }
 
     let rootUl = document.querySelector('.root-list')
-
     let oLi = ''
     let firstDir = ''
     files.map((item,i) => {
-        if (i == 0) {
-            firstDir = item
+        // 过滤非目标文件夹
+        if (item.toLocaleLowerCase().indexOf('gbeta') != -1){      
+            if (!firstDir) {
+                firstDir = item
+            }
+            oLi += `<li ${i == 0 ? 'class="active"' : ''}>${item}</li>`
         }
-        oLi += `<li ${i == 0 ? 'class="active"' : ''}>${item}</li>`
     })
     rootUl.innerHTML = oLi
-    console.log(getDir.getFileList(`${rootDir}/${firstDir}/applications/banggood/templates/black/web/entry/`))
-    // fs.readdir(`${rootDir}/${firstDir}/applications/banggood/templates/black/web/entry`, function (err, files) {
-    //     if (err) {
-    //         return console.log('目录不存在')
-    //     }
-    //     // console.log(files)
-    // })
+    let moduleFolder = getDir.getFileList(`${rootDir}${firstDir}/applications/banggood/templates/black/web/dev/entry/`)
+    console.log(moduleFolder);
 
     // 绑定事件
     let rootList = rootUl.querySelectorAll('li')
