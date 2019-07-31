@@ -1,7 +1,7 @@
 // 引入node模块
 let child_process = require('child_process')
 let fs = require('fs')
-let getDir = require('./module/getDir')
+let filelist = require('./module/filelist')
 
 // 获取页面元素
 let oBtn = document.querySelector('.start-btn')
@@ -15,15 +15,20 @@ let moduleUl = document.querySelector('.module-list')
 let rootDir = 'E:/'
 
 // 读取，并动态生成测试环境目录
-fs.readdir(rootDir, function (err, files) {
+fs.readdir(rootDir, (err, files) => {
     if (err) {
       return console.log('目录不存在')
     }
 
+    // 对文件夹进行排序
+    var newFiles = files.sort((a, b) => {
+        return a.replace(/\D+/,'') - b.replace(/\D+/,'')
+    })
+
     let oLi = ''
-    files.map((item) => {
+    newFiles.map((item) => {
         // 过滤非目标文件夹
-        if (item.toLocaleLowerCase().indexOf('gbeta') != -1){      
+        if (item.toLocaleLowerCase().indexOf('gbeta') != -1 || item.toLocaleLowerCase() == 'pub') {      
             oLi += `<li>${item}</li>`
         }
     })
@@ -32,8 +37,9 @@ fs.readdir(rootDir, function (err, files) {
 
 
 // 绑定事件
-rootUl.onclick = function(e){
-    if(e.target.nodeName.toLocaleLowerCase() == 'li') {
+rootUl.onclick = function (e) {
+    if (e.target.nodeName.toLocaleLowerCase() == 'li') {
+        if (e.target.className == 'active') return
         let rootList = rootUl.querySelectorAll('li')
         for (var i = 0; i < rootList.length; i++) {
             rootList[i].className = ''
@@ -42,20 +48,20 @@ rootUl.onclick = function(e){
         root.value = e.target.innerHTML
         
         // 动态生成模块列表
-        let moduleFolder = getDir.getFileList(`${rootDir}${e.target.innerHTML}/applications/banggood/templates/black/web/dev/entry/`)
+        let moduleFolder = filelist.getFileList(`${rootDir}${e.target.innerHTML}/applications/banggood/templates/black/web/dev/entry/`)
         // console.log(moduleFolder);
         let oLi = ''
         moduleFolder.map((item) => {
             oLi += `<li>${item.foldername}/${item.filename.replace('.js','')}</li>`
         })
-        moduleUl.innerHTML = oLi
+        moduleUl.innerHTML = oLi || '该环境没有符合的模块'
         module.value = ''
         oBtn.className = 'start-btn'
     }
 }
 
-moduleUl.onclick = function(e){
-    if(e.target.nodeName.toLocaleLowerCase() == 'li') {
+moduleUl.onclick = function (e) {
+    if (e.target.nodeName.toLocaleLowerCase() == 'li') {
         let moduleList = moduleUl.querySelectorAll('li')
         for (var i = 0; i < moduleList.length; i++) {
             moduleList[i].className = ''
@@ -67,7 +73,7 @@ moduleUl.onclick = function(e){
 }
 
 // 启动
-oBtn.onclick = function() {
+oBtn.onclick = function () {
     if (this.className.indexOf('active') != -1) {
         let path = `${rootDir}${root.value}/applications/banggood/templates/black/web&&npm run start -tpl=${module.value}`
         console.log(path)

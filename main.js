@@ -1,5 +1,4 @@
 // 主进程
-
 let {app, BrowserWindow} = require('electron')
 
 let win = null
@@ -10,7 +9,7 @@ app.on('ready', () => {
     // 创建新窗口
     win = new BrowserWindow({
         width: 1000,
-        height: 500,
+        height: 800,
         webPreferences: {
             nodeIntegration: true,
         },
@@ -18,7 +17,7 @@ app.on('ready', () => {
     })
 
     //开启渲染进程中的调试模式
-    win.webContents.openDevTools();
+    win.webContents.openDevTools()
 
     // 引入主页面
     win.loadFile('index.html')
