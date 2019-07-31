@@ -54,6 +54,11 @@ ul {
     font-size: 12px;
 }
 
+.main-cnt .block-btn a {
+    cursor: default;
+}
+
 .main-cnt .block-btn a.active {
+    cursor: pointer;
     background: #269a55;
 }

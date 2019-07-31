@@ -48,7 +48,9 @@ rootUl.onclick = function(e){
         moduleFolder.map((item) => {
             oLi += `<li>${item.foldername}/${item.filename.replace('.js','')}</li>`
         })
-        moduleUl.innerHTML = oLi 
+        moduleUl.innerHTML = oLi
+        module.value = ''
+        oBtn.className = 'start-btn'
     }
 }
 
@@ -60,11 +62,15 @@ moduleUl.onclick = function(e){
         }
         e.target.className = 'active'
         module.value = e.target.innerHTML
+        oBtn.className = 'start-btn active'
     }
 }
 
 // 启动
-oBtn.onclick = () => {
-    console.log(root.value, module.value)
-    child_process.exec(`start cmd.exe /K "cd /d E:\\${root.value}\\applications\\banggood\\templates\\black\\web&&npm run start -tpl=${module.value}"`)
+oBtn.onclick = function() {
+    if (this.className.indexOf('active') != -1) {
+        let path = `${rootDir}${root.value}/applications/banggood/templates/black/web&&npm run start -tpl=${module.value}`
+        console.log(path)
+        child_process.exec(`start cmd.exe /K "cd /d ${path}"`)
+    }
 }
