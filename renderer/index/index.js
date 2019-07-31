@@ -1,6 +1,7 @@
 // 引入node模块
 let child_process = require('child_process')
 let fs = require('fs')
+let path = require('path')
 let filelist = require('./module/filelist')
 
 // 获取页面元素
@@ -11,7 +12,7 @@ let module = document.querySelector('.module')
 let moduleUl = document.querySelector('.module-list')
 
 // 获取配置文件
-let __config = fs.readFileSync('./data/config.json') ? JSON.parse(fs.readFileSync('./data/config.json')) : {}
+let __config = fs.readFileSync(path.join(__dirname,'/data/config.json')) ? JSON.parse(fs.readFileSync(path.join(__dirname,'/data/config.json'))) : {}
 
 // 设置根目录
 let rootDir = __config.rootDir
@@ -51,7 +52,6 @@ rootUl.onclick = function (e) {
         
         // 动态生成模块列表
         let moduleFolder = filelist.getFileList(`${rootDir}${e.target.innerHTML}/applications/banggood/templates/black/web/dev/entry/`)
-        // console.log(moduleFolder);
         let oLi = ''
         moduleFolder.map((item) => {
             oLi += `<li>${item.foldername}/${item.filename.replace('.js','')}</li>`

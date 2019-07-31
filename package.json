@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "cmd": "electron ."
+    "cmd": "electron .",
+    "build": "electron-packager . HelloWorld --platform=win32 --arch=x64 --icon=icon.ico --out=./build --asar --app-version=0.0.1 --overwrite --ignore=node_modules"
   },
   "keywords": [],
   "author": "",
