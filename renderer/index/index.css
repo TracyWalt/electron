@@ -62,3 +62,38 @@ ul {
     cursor: pointer;
     background: #269a55;
 }
+
+.settings {
+    font-size: 0;
+}
+
+.settings span {
+    display: inline-block;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.settings .setting-value {
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100px;
+    padding: 0 10px;
+    background: none;
+    outline: none;
+    margin: 0 10px;
+    vertical-align: top;
+}
+
+.settings .setting-btn {
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    border-radius: 3px;
+    background: #269a55;
+    display: block;
+    text-decoration: none;
+}

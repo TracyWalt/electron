@@ -1,5 +1,5 @@
 // 主进程
-let {app, BrowserWindow} = require('electron')
+let {app, BrowserWindow, ipcMain} = require('electron')
 
 let win = null
 
@@ -24,5 +24,14 @@ app.on('ready', () => {
 
     win.on('closed', () => {
         win = null
+    })
+
+    // 自定义系统菜单
+    win.webContents.on('did-finish-load', () => {
+        // require('./main/menu')
+
+        ipcMain.on('reload', (ev, data) => {
+            win.reload()
+        })
     })
 })

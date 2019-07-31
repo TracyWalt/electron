@@ -7,7 +7,15 @@
     <title>命令管理器</title>
 </head>
 <body>
+    
     <div class="main-cnt">
+        <div class="block">
+            <h2>设置根目录</h2>
+            <div class="settings">
+                <span>当前根目录<input type="text" class="setting-value" value="E:/"></span>
+                <span><a href="javascript:;" class="setting-btn">保存</a></span>
+            </div>
+        </div>
         <div class="block">
             <h2>请选择环境：</h2>
             <ul class="root-list"></ul>
@@ -24,5 +32,6 @@
     </div>
     <link rel="stylesheet" href="renderer/index/index.css">
     <script src="renderer/index/index.js"></script>
+    <script src="renderer/settings/settings.js"></script>
 </body>
 </html>

@@ -10,9 +10,11 @@ let rootUl = document.querySelector('.root-list')
 let module = document.querySelector('.module')
 let moduleUl = document.querySelector('.module-list')
 
+// 获取配置文件
+let __config = fs.readFileSync('./data/config.json') ? JSON.parse(fs.readFileSync('./data/config.json')) : {}
+
 // 设置根目录
-// let rootDir = 'E:/web/'
-let rootDir = 'E:/'
+let rootDir = __config.rootDir
 
 // 读取，并动态生成测试环境目录
 fs.readdir(rootDir, (err, files) => {
@@ -21,7 +23,7 @@ fs.readdir(rootDir, (err, files) => {
     }
 
     // 对文件夹进行排序
-    var newFiles = files.sort((a, b) => {
+    let newFiles = files.sort((a, b) => {
         return a.replace(/\D+/,'') - b.replace(/\D+/,'')
     })
 
@@ -41,7 +43,7 @@ rootUl.onclick = function (e) {
     if (e.target.nodeName.toLocaleLowerCase() == 'li') {
         if (e.target.className == 'active') return
         let rootList = rootUl.querySelectorAll('li')
-        for (var i = 0; i < rootList.length; i++) {
+        for (let i = 0; i < rootList.length; i++) {
             rootList[i].className = ''
         }
         e.target.className = 'active'
@@ -63,7 +65,7 @@ rootUl.onclick = function (e) {
 moduleUl.onclick = function (e) {
     if (e.target.nodeName.toLocaleLowerCase() == 'li') {
         let moduleList = moduleUl.querySelectorAll('li')
-        for (var i = 0; i < moduleList.length; i++) {
+        for (let i = 0; i < moduleList.length; i++) {
             moduleList[i].className = ''
         }
         e.target.className = 'active'
