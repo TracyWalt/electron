@@ -11,7 +11,7 @@ settingBtn.onclick = () => {
     let curDir = settingInput.value
     if (!curDir) return
     __config.rootDir = curDir
-    fs.writeFile(path.join(__dirname,'/data/config.json'), JSON.stringify(__config), {'flag': 'w'}, (err) => {
+    fs.writeFile(cfgPath, JSON.stringify(__config), {'flag': 'w'}, (err) => {
         if (err) {
             console.log('config.json 文件写入失败')
         }

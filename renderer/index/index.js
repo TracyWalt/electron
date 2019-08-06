@@ -11,8 +11,24 @@ let rootUl = document.querySelector('.root-list')
 let module = document.querySelector('.module')
 let moduleUl = document.querySelector('.module-list')
 
+// 初始化时候生成配置文件
+let cfgPath = 'C:/electron-cmd/data/config.json'
+let cfg = {
+    "rootDir":"E:/"
+}
+try {
+    fs.statSync(path.join(cfgPath))
+} catch (error) {
+    fs.mkdirSync('C:electron-cmd')
+    fs.mkdirSync('C:electron-cmd/data')
+    fs.writeFileSync(path.join(cfgPath), JSON.stringify(cfg), {'flag': 'w'}, (err) => {
+        if (err) {
+            console.log('config.json 文件写入失败')
+        }
+    })
+}
 // 获取配置文件
-let __config = fs.readFileSync(path.join(__dirname,'/data/config.json')) ? JSON.parse(fs.readFileSync(path.join(__dirname,'/data/config.json'))) : {}
+let __config = fs.readFileSync(path.join(cfgPath)) ? JSON.parse(fs.readFileSync(path.join(cfgPath))) : {}
 
 // 设置根目录
 let rootDir = __config.rootDir
