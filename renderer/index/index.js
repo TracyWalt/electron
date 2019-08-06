@@ -1,100 +1,125 @@
 // 引入node模块
 let child_process = require('child_process')
 let fs = require('fs')
-let path = require('path')
 let filelist = require('./module/filelist')
 
-// 获取页面元素
-let oBtn = document.querySelector('.start-btn')
-let root = document.querySelector('.root')
-let rootUl = document.querySelector('.root-list')
-let module = document.querySelector('.module')
-let moduleUl = document.querySelector('.module-list')
-
-// 初始化时候生成配置文件
-let cfgPath = 'C:/electron-cmd/data/config.json'
-let cfg = {
-    "rootDir":"E:/"
-}
-try {
-    fs.statSync(path.join(cfgPath))
-} catch (error) {
-    fs.mkdirSync('C:electron-cmd')
-    fs.mkdirSync('C:electron-cmd/data')
-    fs.writeFileSync(path.join(cfgPath), JSON.stringify(cfg), {'flag': 'w'}, (err) => {
-        if (err) {
-            console.log('config.json 文件写入失败')
-        }
-    })
-}
-// 获取配置文件
-let __config = fs.readFileSync(path.join(cfgPath)) ? JSON.parse(fs.readFileSync(path.join(cfgPath))) : {}
-
-// 设置根目录
-let rootDir = __config.rootDir
-
-// 读取，并动态生成测试环境目录
-fs.readdir(rootDir, (err, files) => {
-    if (err) {
-      return console.log('目录不存在')
-    }
-
-    // 对文件夹进行排序
-    let newFiles = files.sort((a, b) => {
-        return a.replace(/\D+/,'') - b.replace(/\D+/,'')
-    })
-
-    let oLi = ''
-    newFiles.map((item) => {
-        // 过滤非目标文件夹
-        if (item.toLocaleLowerCase().indexOf('gbeta') != -1 || item.toLocaleLowerCase() == 'pub') {      
-            oLi += `<li>${item}</li>`
-        }
-    })
-    rootUl.innerHTML = oLi   
-})
-
-
-// 绑定事件
-rootUl.onclick = function (e) {
-    if (e.target.nodeName.toLocaleLowerCase() == 'li') {
-        if (e.target.className == 'active') return
-        let rootList = rootUl.querySelectorAll('li')
-        for (let i = 0; i < rootList.length; i++) {
-            rootList[i].className = ''
-        }
-        e.target.className = 'active'
-        root.value = e.target.innerHTML
+let index = {
+    rootDir: filelist.getConfig().rootDir,
+    D: {
+        'oBtn': document.querySelector('.start-btn'),
+        'root': document.querySelector('.root'),
+        'rootUl': document.querySelector('.root-list'),
+        'module': document.querySelector('.module'),
+        'moduleUl': document.querySelector('.module-list'),
+        'oBtnAll': document.querySelectorAll('.btn'),
+    },
+    init() {
+        this.createRootList()
+        this.bindEvent()
+    },
+    // 读取，并动态生成环境列表
+    createRootList() {
+        const S = this
+        fs.readdir(S.rootDir, (err, files) => {
+            if (err) {
+              return console.log('目录不存在')
+            }
         
-        // 动态生成模块列表
-        let moduleFolder = filelist.getFileList(`${rootDir}${e.target.innerHTML}/applications/banggood/templates/black/web/dev/entry/`)
-        let oLi = ''
-        moduleFolder.map((item) => {
-            oLi += `<li>${item.foldername}/${item.filename.replace('.js','')}</li>`
+            // 对文件夹进行排序
+            let newFiles = files.sort((a, b) => {
+                return a.replace(/\D+/,'') - b.replace(/\D+/,'')
+            })
+        
+            let oLi = ''
+            newFiles.map((item) => {
+                // 过滤非目标文件夹
+                if (item.toLocaleLowerCase().indexOf('gbeta') != -1 || item.toLocaleLowerCase() == 'pub') {      
+                    oLi += `<li>${item}</li>`
+                }
+            })
+            S.D.rootUl.innerHTML = oLi   
         })
-        moduleUl.innerHTML = oLi || '该环境没有符合的模块'
-        module.value = ''
-        oBtn.className = 'start-btn'
-    }
-}
+    },
+    // 绑定事件
+    bindEvent() {
+        const S = this
+        // 选择环境
+        S.D.rootUl.onclick = function (e) {
+            if (e.target.nodeName.toLocaleLowerCase() == 'li') {
+                if (e.target.className == 'active') return
+                let rootList = S.D.rootUl.querySelectorAll('li')
+                for (let i = 0; i < rootList.length; i++) {
+                    rootList[i].className = ''
+                }
+                e.target.className = 'active'
+                S.D.root.value = e.target.innerHTML
+                
+                // 动态生成模块列表
+                let moduleFolder = filelist.getFileList(`${S.rootDir}${e.target.innerHTML}/applications/banggood/templates/black/web/dev/entry/`)
+                let oLi = ''
+                moduleFolder.map((item) => {
+                    oLi += `<li>${item.foldername}/${item.filename.replace('.js','')}</li>`
+                })
+                S.D.moduleUl.innerHTML = oLi || '该环境没有符合的模块'
+                S.D.module.value = ''
+                S.D.oBtn.className = 'btn start-btn'
 
-moduleUl.onclick = function (e) {
-    if (e.target.nodeName.toLocaleLowerCase() == 'li') {
-        let moduleList = moduleUl.querySelectorAll('li')
-        for (let i = 0; i < moduleList.length; i++) {
-            moduleList[i].className = ''
+                // 其他按钮只需选中环境即可点击执行
+                S.D.oBtnAll.forEach(function(item) {
+                    let clsName = item.className;
+                    if(clsName.indexOf('start-btn') == -1){
+                        item.className = `${clsName} active`
+                    }
+                })
+            }
         }
-        e.target.className = 'active'
-        module.value = e.target.innerHTML
-        oBtn.className = 'start-btn active'
-    }
+
+        // 选择模块
+        S.D.moduleUl.onclick = function (e) {
+            if (e.target.nodeName.toLocaleLowerCase() == 'li') {
+                let moduleList = S.D.moduleUl.querySelectorAll('li')
+                for (let i = 0; i < moduleList.length; i++) {
+                    moduleList[i].className = ''
+                }
+                e.target.className = 'active'
+                S.D.module.value = e.target.innerHTML
+                S.D.oBtn.className = 'btn start-btn active'
+            }
+        }
+
+        // 执行命令
+        S.D.oBtnAll.forEach((item) => {
+            item.onclick = () => {
+                let clsName = item.className
+                let path = `${S.rootDir}${S.D.root.value}/applications/banggood/templates/black/`
+                if (clsName.indexOf('active') != -1) {
+                    // 新工程本地开发启动
+                    if(clsName.indexOf('start-btn') != -1){
+                        path += `web&&npm run start -tpl=${S.D.module.value}`
+                    }
+                    // 新工程sprite
+                    if(clsName.indexOf('sprite-btn') != -1){
+                        path += `web&&npm run sprite`
+                    }
+                    // 新工程build
+                    if(clsName.indexOf('build-btn') != -1){
+                        path += `web&&npm run build`
+                    }
+                    // 旧工程详情页build
+                    if(clsName.indexOf('build-detail-btn') != -1){
+                        path += `detail/develop&&node r.js -o build.js`
+                    }
+                    // 旧工程搜索页build
+                    if(clsName.indexOf('build-search-btn') != -1){
+                        path += `search&&npm run build`
+                    }
+                    console.log(path)
+                    child_process.exec(`start cmd.exe /K "cd /d ${path}"`)
+                }
+            }
+        })
+    },
 }
 
-// 启动
-oBtn.onclick = function () {
-    if (this.className.indexOf('active') != -1) {
-        let path = `${rootDir}${root.value}/applications/banggood/templates/black/web&&npm run start -tpl=${module.value}`
-        console.log(path)
-        child_process.exec(`start cmd.exe /K "cd /d ${path}"`)
-    }
-}
+index.init()
+
