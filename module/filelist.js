@@ -53,6 +53,10 @@ let FileList = {
     getConfig() {
         return fs.readFileSync(path.join(cfg.config.cfgPath)) ? JSON.parse(fs.readFileSync(path.join(cfg.config.cfgPath))) : {}
     },
+    // 获取配置文件路径
+    getConfigPath() {
+        return cfg.config.cfgPath
+    },
 }
 
 FileList.createConfig()

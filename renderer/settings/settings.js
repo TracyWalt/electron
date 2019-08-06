@@ -1,6 +1,7 @@
 let { ipcRenderer } = require('electron')
 
 let settings =  {
+    configPath: filelist.getConfigPath(),
     config: filelist.getConfig(),
     rootDir: filelist.getConfig().rootDir,
     D: {
@@ -18,8 +19,8 @@ let settings =  {
         S.D.settingBtn.onclick = () => {
             let curDir = S.D.settingInput.value
             if (!curDir) return
-            S.D.config.rootDir = curDir
-            fs.writeFile(cfgPath, JSON.stringify(S.D.config), {'flag': 'w'}, (err) => {
+            S.config.rootDir = curDir
+            fs.writeFile(S.configPath, JSON.stringify(S.config), {'flag': 'w'}, (err) => {
                 if (err) {
                     console.log('config.json 文件写入失败')
                 }
