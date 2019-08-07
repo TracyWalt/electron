@@ -102,3 +102,47 @@ ul {
     display: block;
     text-decoration: none;
 }
+
+.main-cnt-time .block {
+    overflow: auto;
+}
+
+.main-cnt-time table {
+    border-spacing: 0;
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 12px;
+}
+
+.main-cnt-time table tr td:first-child,
+.main-cnt-time table tr th:first-child {
+    text-align: left;
+}
+
+.main-cnt-time table td,
+.main-cnt-time table th {
+    padding: 4px 5px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    font-weight: normal;
+}
+
+.main-cnt-time table th {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #efefef;
+    background-color: #f7f7f7;
+    color: #666;
+}
+
+.main-cnt-time table th, .main-cnt-time table td {
+    border: 1px solid #ddd;
+    min-width: 40px;
+    color: #000000;
+}
