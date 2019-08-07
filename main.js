@@ -17,7 +17,7 @@ app.on('ready', () => {
     })
 
     //开启渲染进程中的调试模式
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools()
 
     // 引入主页面
     win.loadFile('index.html')
@@ -28,7 +28,7 @@ app.on('ready', () => {
 
     // 自定义系统菜单
     win.webContents.on('did-finish-load', () => {
-        // require('./main/menu')
+        require('./main/menu')
 
         ipcMain.on('reload', (ev, data) => {
             win.reload()

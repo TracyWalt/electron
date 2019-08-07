@@ -1,6 +1,6 @@
 let { ipcRenderer } = require('electron')
 
-let settings =  {
+module.exports = {
     configPath: filelist.getConfigPath(),
     config: filelist.getConfig(),
     rootDir: filelist.getConfig().rootDir,
@@ -30,6 +30,3 @@ let settings =  {
         }
     },
 }
-
-settings.init()
-

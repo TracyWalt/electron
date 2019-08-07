@@ -2,6 +2,8 @@
 let child_process = require('child_process')
 let fs = require('fs')
 let filelist = require('./module/filelist')
+let router = require('./renderer/router/router')
+let settings = require('./renderer/settings/settings')
 
 let index = {
     rootDir: filelist.getConfig().rootDir,
@@ -14,6 +16,8 @@ let index = {
         'oBtnAll': document.querySelectorAll('.btn'),
     },
     init() {
+        router.init()
+        settings.init()
         this.createRootList()
         this.bindEvent()
     },

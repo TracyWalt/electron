@@ -8,14 +8,7 @@
 </head>
 <body>
     
-    <div class="main-cnt">
-        <div class="block">
-            <h2>设置根目录</h2>
-            <div class="settings">
-                <span>当前根目录<input type="text" class="setting-value" value="E:/"></span>
-                <span><a href="javascript:;" class="setting-btn">保存</a></span>
-            </div>
-        </div>
+    <div class="main-cnt main-cnt-dev">
         <div class="block">
             <h2>请选择环境：</h2>
             <ul class="root-list"></ul>
@@ -34,8 +27,26 @@
             <a href="javascript:;" class="btn build-search-btn">搜索页 build</a>
         </div>
     </div>
+    <div class="main-cnt main-cnt-setting">
+        <div class="block">
+            <h2>设置根目录</h2>
+            <div class="settings">
+                <span>当前根目录<input type="text" class="setting-value" value="E:/"></span>
+                <span><a href="javascript:;" class="setting-btn">保存</a></span>
+            </div>
+        </div>
+    </div>
+    <div class="main-cnt main-cnt-time">
+        <div class="block">
+            <h2>每日花费</h2>
+            <table>
+                <tr>
+                    <td>每日花费</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <link rel="stylesheet" href="renderer/index/index.css">
     <script src="renderer/index/index.js"></script>
-    <script src="renderer/settings/settings.js"></script>
 </body>
 </html>
