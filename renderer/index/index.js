@@ -14,6 +14,7 @@ let index = {
         'module': document.querySelector('.module'),
         'moduleUl': document.querySelector('.module-list'),
         'oBtnAll': document.querySelectorAll('.btn'),
+        'moduleFilterInput': document.querySelector('.module-filter'),
     },
     init() {
         router.init()
@@ -89,6 +90,18 @@ let index = {
                 S.D.module.value = e.target.innerHTML
                 S.D.oBtn.className = 'btn start-btn active'
             }
+        }
+
+        // 过滤模块
+        S.D.moduleFilterInput.onkeyup = function () {
+            let val = this.value
+            S.D.moduleUl.querySelectorAll('li').forEach((item)=>{
+                let text = item.innerHTML
+                item.style.display = 'none'
+                if(text.indexOf(val) != -1){
+                    item.style.display = 'block'
+                }
+            })
         }
 
         // 执行命令

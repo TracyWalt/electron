@@ -17,7 +17,9 @@ app.on('ready', () => {
     })
 
     //开启渲染进程中的调试模式
-    win.webContents.openDevTools()
+    if (process.env.NODE_ENV == 'dev'){
+        win.webContents.openDevTools()
+    }
 
     // 引入主页面
     win.loadFile('index.html')

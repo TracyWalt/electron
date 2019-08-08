@@ -29,6 +29,17 @@ ul {
     margin-bottom: 10px;
 }
 
+.module-filter {
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 120px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+}
+
 .main-cnt .block li {
     float: left;
     cursor: pointer;
