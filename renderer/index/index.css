@@ -141,6 +141,10 @@ ul {
     color: #666;
 }
 
+.main-cnt-time table tr:hover {
+    background-color: #f7f7f7;
+}
+
 .main-cnt-time table th, .main-cnt-time table td {
     border: 1px solid #ddd;
     min-width: 40px;

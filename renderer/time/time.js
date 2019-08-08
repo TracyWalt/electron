@@ -3,6 +3,7 @@ let { net } = require('electron').remote
 module.exports = {
     startDate: '2019-08-01',
     endDate: '2019-08-08',
+    nameArr: ['杨智富','卢仕幸','杨振烈','黄惠林','陈志东','赖彬','郭伯豪','莫燕红','张育铭','韦文耐','白若男'],
     D: {
         'table': document.querySelector('.main-cnt-time').querySelector('table')
     },
@@ -25,7 +26,7 @@ module.exports = {
     },
     createList(data) {
         const S = this
-        console.log(data)
+        console.log(JSON.stringify(data))
         if(data && data.rows.length > 0){
             // 重新组装数据结构
             let tableCols = {}
@@ -41,19 +42,24 @@ module.exports = {
                     }
                     dayArr.push(day)
                 }
-                let keyStr = item.name
-                if(!tableRows[keyStr]){
-                    tableRows[keyStr] = {}
-                    tableRows[keyStr]['data'] = [item]
-                }else{
-                    tableRows[keyStr]['data'].push(item)
+                if (S.nameArr.indexOf(item.name) != -1) {
+                    let keyStr = item.name
+                    if(!tableRows[keyStr]){
+                        tableRows[keyStr] = {}
+                        tableRows[keyStr]['data'] = [item]
+                    }else{
+                        tableRows[keyStr]['data'].push(item)
+                    }
                 }
             })
 
+            // console.log(tableCols)
+            console.log(tableRows)
+
+            // 按日期升序排序
             dayArr = dayArr.sort((a, b) => {
                 return a.replace(/-/g,'') - b.replace(/-/g,'')
             })
-
             let sortTableCols = {}
             dayArr.map((item) => {
                 let formtItem = item.replace(/-/g,'')
@@ -62,11 +68,7 @@ module.exports = {
                 if(formtItem >= startDate && formtItem <= endDate){
                     sortTableCols[item] = tableCols[item]
                 }
-            })
-
-            console.log(sortTableCols)
-            console.log(tableRows)
-            
+            })               
             // 绘制表头
             let tr = '<th>开发人员</th>'
             for(let i in sortTableCols){
@@ -74,11 +76,15 @@ module.exports = {
             }
             tr += '<th>总计</th>'
             
+
             // 绘制td
             let td = ''
+            let timeArr = []
+            let sortTableRows = {}
             for(let i in tableRows){
-                td += '<tr>'
-                td += `<td>${i}</td>`
+                sortTableRows[i] = {}
+                sortTableRows[i]['name'] = i
+                sortTableRows[i]['daylist'] = []
                 let totalTime = 0
                 for(let k in sortTableCols){
                     let time = 0
@@ -91,12 +97,32 @@ module.exports = {
                     })
                     totalTime += time
                     time = time ? parseFloat(time.toFixed(2)) : ''
-                    td += `<td>${time}</td>`
+                    sortTableRows[i]['daylist'].push(time)
                 }
-                td += `<td>${parseFloat(totalTime.toFixed(2))}</td>`
-                td += '</tr>'
+                totalTime = parseFloat(totalTime.toFixed(2))
+                sortTableRows[i]['totalTime'] = totalTime
+                timeArr.push(totalTime)
             }
 
+            // 按工时倒序排序
+            timeArr = timeArr.sort((a, b) => {
+                return b - a
+            })
+            timeArr.map((item) => {
+                for(let i in sortTableRows){
+                    if(item == sortTableRows[i]['totalTime']){
+                        td += '<tr>'
+                        td += `<td>${sortTableRows[i]['name']}</td>`
+                        sortTableRows[i]['daylist'].map((item) => {
+                            td += `<td>${item}</td>`
+                        })
+                        td += `<td>${sortTableRows[i]['totalTime']}</td>`
+                        td += '</tr>'
+                    }
+                }
+            })
+
+            // 插入数据
             S.D.table.innerHTML = tr + td
         }
     },
