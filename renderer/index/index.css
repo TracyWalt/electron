@@ -116,6 +116,7 @@ ul {
 
 .main-cnt-time .block {
     overflow: auto;
+    position: relative;
 }
 
 .main-cnt-time table {
@@ -160,4 +161,36 @@ ul {
     border: 1px solid #ddd;
     min-width: 40px;
     color: #000000;
+}
+
+.main-cnt-time table tr.loading td{
+    padding: 0;
+    border: 0 none;
+    text-align: center;
+    font-size: 16px;
+}
+
+.main-cnt-time table tr.loading:hover {
+    background: none;
+}
+
+.main-cnt-time .block h2 {
+    position: relative;
+    line-height: 24px;
+}
+
+.main-cnt-time .update-time-btn {
+    color: #fff;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 15px;
+    border-radius: 3px;
+    background: #269a55;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    right: 0;
+    top: 0;
 }

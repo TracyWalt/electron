@@ -5,10 +5,12 @@ module.exports = {
     endDate: '2019-08-08',
     nameArr: ['杨智富','卢仕幸','杨振烈','黄惠林','陈志东','赖彬','郭伯豪','莫燕红','张育铭','韦文耐','白若男'],
     D: {
-        'table': document.querySelector('.main-cnt-time').querySelector('table')
+        'table': document.querySelector('.main-cnt-time').querySelector('table'),
+        'updateBtn': document.querySelector('.main-cnt-time').querySelector('.update-time-btn'),
     },
     init() {
         this.ajaxData()
+        this.update()
     },
     ajaxData() {
         const S = this
@@ -21,6 +23,9 @@ module.exports = {
             response.on('end', () => {
                 S.createList(data && JSON.parse(data.join('')))
             })
+        })
+        request.on('error', () => {
+            S.D.table.style.opacity = '1'
         })
         request.end()     
     },
@@ -124,6 +129,7 @@ module.exports = {
 
             // 插入数据
             S.D.table.innerHTML = tr + td
+            S.D.table.style.opacity = '1'
         }
     },
     formatWeek(num) {
@@ -149,5 +155,12 @@ module.exports = {
                 break;
         }
         return str
+    },
+    update() {
+        const S = this
+        S.D.updateBtn.onclick = () => {
+            S.ajaxData()
+            S.D.table.style.opacity = '0.6'
+        }
     },
 }

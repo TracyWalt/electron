@@ -59,8 +59,15 @@ let index = {
                 e.target.className = 'active'
                 S.D.root.value = e.target.innerHTML
                 
+                // gbeta目录下是否还有 www目录
+                let __url = `${S.rootDir}${e.target.innerHTML}/applications/banggood/templates/black/web/dev/entry/`
+                let www = fs.readdirSync(`${S.rootDir}${e.target.innerHTML}`)[0]
+                if(www == 'www'){
+                    __url = `${S.rootDir}${e.target.innerHTML}/www/applications/banggood/templates/black/web/dev/entry/`
+                }
+
                 // 动态生成模块列表
-                let moduleFolder = filelist.getFileList(`${S.rootDir}${e.target.innerHTML}/applications/banggood/templates/black/web/dev/entry/`)
+                let moduleFolder = filelist.getFileList(__url)
                 let oLi = ''
                 moduleFolder.map((item) => {
                     oLi += `<li>${item.foldername}/${item.filename.replace('.js','')}</li>`
