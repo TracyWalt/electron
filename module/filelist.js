@@ -40,7 +40,8 @@ let FileList = {
             // 不存在，则自动创建目录和文件
             fs.mkdirSync(cfg.config.cfgRootPath)
             let __cfg = {
-                'rootDir': cfg.config.rootDir
+                'rootDir': cfg.config.rootDir,
+                'folder': ''
             }
             fs.writeFileSync(path.join(cfg.config.cfgPath), JSON.stringify(__cfg), {'flag': 'w'}, (err) => {
                 if (err) {

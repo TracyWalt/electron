@@ -81,16 +81,20 @@ ul {
 
 .settings {
     font-size: 0;
+    margin-bottom: 20px;
 }
 
-.settings span {
+.settings em {
     display: inline-block;
     font-size: 12px;
     height: 30px;
     line-height: 30px;
+    width: 150px;
+    font-style: normal;
 }
 
-.settings .setting-value {
+.settings .setting-value,
+.settings .setting-folder {
     height: 28px;
     line-height: 28px;
     border: 1px solid #ccc;
@@ -103,14 +107,21 @@ ul {
     vertical-align: top;
 }
 
+.settings .setting-folder {
+    width: 300px;
+    height: 100px;
+}
+
 .settings .setting-btn {
+    display: inline-block;
+    font-size: 12px;
     color: #fff;
+    margin: 0 10px;
     height: 30px;
     line-height: 30px;
     padding: 0 15px;
     border-radius: 3px;
     background: #269a55;
-    display: block;
     text-decoration: none;
 }
 
@@ -179,6 +190,28 @@ ul {
     line-height: 24px;
 }
 
+.main-cnt-time .block h2 span {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.main-cnt-time .block h2 input {
+    height: 22px;
+    line-height: 22px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 120px;
+    margin: 0 10px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+}
+
 .main-cnt-time .update-time-btn {
     color: #fff;
     height: 24px;
@@ -190,7 +223,4 @@ ul {
     text-decoration: none;
     font-size: 12px;
     font-weight: normal;
-    position: absolute;
-    right: 0;
-    top: 0;
 }

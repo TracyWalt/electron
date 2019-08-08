@@ -7,6 +7,7 @@ let settings = require('./renderer/settings/settings')
 
 let index = {
     rootDir: filelist.getConfig().rootDir,
+    folder: filelist.getConfig().folder,
     D: {
         'oBtn': document.querySelector('.start-btn'),
         'root': document.querySelector('.root'),
@@ -36,9 +37,21 @@ let index = {
             })
         
             let oLi = ''
+            let folderArr = S.folder.split(';')
             newFiles.map((item) => {
                 // 过滤非目标文件夹
-                if (item.toLocaleLowerCase().indexOf('gbeta') != -1 || item.toLocaleLowerCase() == 'pub') {      
+                if(S.folder){
+                    let isHas = false
+                    folderArr.map((f) => {
+                        if(item.toLocaleLowerCase() == f.toLocaleLowerCase()){
+                            isHas = true
+                            return false
+                        }
+                    })
+                    if (!isHas) {      
+                        oLi += `<li>${item}</li>`
+                    }
+                }else{
                     oLi += `<li>${item}</li>`
                 }
             })

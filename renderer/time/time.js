@@ -1,31 +1,66 @@
-let { net } = require('electron').remote
+// let { net } = require('electron').remote
 
 module.exports = {
-    startDate: '2019-08-01',
-    endDate: '2019-08-08',
-    nameArr: ['杨智富','卢仕幸','杨振烈','黄惠林','陈志东','赖彬','郭伯豪','莫燕红','张育铭','韦文耐','白若男'],
+    params:{
+        startDate: '2019-08-01',
+        endDate: '2019-08-08',
+        nameArr: ['杨智富','卢仕幸','杨振烈','黄惠林','陈志东','赖彬','郭伯豪','莫燕红','张育铭','韦文耐','白若男'],
+    },
     D: {
         'table': document.querySelector('.main-cnt-time').querySelector('table'),
         'updateBtn': document.querySelector('.main-cnt-time').querySelector('.update-time-btn'),
+        'startTimeInput': document.querySelector('.main-cnt-time').querySelector('.start-time'),
+        'endTimeInput': document.querySelector('.main-cnt-time').querySelector('.end-time'),
     },
     init() {
+        this.initParams()
         this.ajaxData()
         this.update()
     },
+    // 初始化参数,根据系统时间获取当日所属月份 1号到当日的数据
+    initParams() {
+        const S = this
+        let date = new Date()
+        let year = date.getFullYear()
+        let month = date.getMonth()+1
+        let day = date.getDate()
+        let curStartTime = `${year}-${S.addZreo(month)}-01`
+        let curEndTime = `${year}-${S.addZreo(month)}-${S.addZreo(day)}`
+        S.D.startTimeInput.value = curStartTime
+        S.D.endTimeInput.value = curEndTime
+        S.params.startDate = curStartTime
+        S.params.endDate = curEndTime
+    },
     ajaxData() {
         const S = this
-        let data = []
-        let request = net.request(`http://172.16.4.2/api/spent_on_tasks?dept=前端开发平台&from=${S.startDate}&to=${S.endDate}`)
-        request.on('response', (response) => {
-            response.on('data', (chunk) => {
+        // let data = []
+        // let request = net.request(`http://172.16.4.2/api/spent_on_tasks?dept=前端开发平台&from=${S.startDate}&to=${S.endDate}`)
+        // request.on('response', (response) => {
+        //     response.on('data', (chunk) => {
+        //         S.D.table.style.opacity = '1'
+        //         data.push(chunk)
+        //     })
+        //     response.on('end', () => {
+        //         S.createList(data && JSON.parse(data.join('')))
+        //     })
+        // })
+        // request.end()
+        
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET',`http://172.16.4.2/api/spent_on_tasks?dept=前端开发平台&from=${S.params.startDate}&to=${S.params.endDate}`,true)
+        xhr.send()
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState===4){
+                if(xhr.status===200){
+                    setTimeout(() => {
+                        S.createList(JSON.parse(xhr.responseText))
+                    }, 1000)
+                }else{
+                    console.log('ajax error...')
+                }
                 S.D.table.style.opacity = '1'
-                data.push(chunk)
-            })
-            response.on('end', () => {
-                S.createList(data && JSON.parse(data.join('')))
-            })
-        })
-        request.end()     
+            }
+        }
     },
     createList(data) {
         const S = this
@@ -45,7 +80,7 @@ module.exports = {
                     }
                     dayArr.push(day)
                 }
-                if (S.nameArr.indexOf(item.name) != -1) {
+                if (S.params.nameArr.indexOf(item.name) != -1) {
                     let keyStr = item.name
                     if(!tableRows[keyStr]){
                         tableRows[keyStr] = {}
@@ -66,8 +101,8 @@ module.exports = {
             let sortTableCols = {}
             dayArr.map((item) => {
                 let formtItem = item.replace(/-/g,'')
-                let startDate = S.startDate.replace(/-/g,'')
-                let endDate = S.endDate.replace(/-/g,'')
+                let startDate = S.params.startDate.replace(/-/g,'')
+                let endDate = S.params.endDate.replace(/-/g,'')
                 if(formtItem >= startDate && formtItem <= endDate){
                     sortTableCols[item] = tableCols[item]
                 }
@@ -154,9 +189,14 @@ module.exports = {
         }
         return str
     },
+    addZreo(num) {
+        return num*1 >= 10 ? `''${num}` : `0${num}`
+    },
     update() {
         const S = this
         S.D.updateBtn.onclick = () => {
+            S.params.startDate = S.D.startTimeInput.value
+            S.params.endDate = S.D.endTimeInput.value
             S.ajaxData()
             S.D.table.style.opacity = '0.6'
         }

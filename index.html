@@ -31,14 +31,28 @@
         <div class="block">
             <h2>设置根目录</h2>
             <div class="settings">
-                <span>当前根目录<input type="text" class="setting-value" value="E:/"></span>
-                <span><a href="javascript:;" class="setting-btn">保存</a></span>
+                <em>当前根目录:</em>
+                <input type="text" class="setting-value" value="E:/">
+            </div>
+            <div class="settings">
+                <em>过滤文件夹:</em>
+                <textarea class="setting-folder" placeholder="多个文件夹用分号;隔开">pci-pub;pci-beta;project;osPlatform;WorkSpace;$RECYCLE.BIN;System Volume Information</textarea>
+            </div>
+            <div class="settings">
+                <em></em>
+                <a href="javascript:;" class="setting-btn">保存</a>
             </div>
         </div>
     </div>
     <div class="main-cnt main-cnt-time">
         <div class="block">
-            <h2>每日花费<a href="javascript:;" class="update-time-btn">刷新</a></h2>
+            <h2>
+                每日花费
+                <span>
+                    <input type="text" class="start-time" placeholder="开始时间">-<input type="text" class="end-time" placeholder="结束时间">
+                    <a href="javascript:;" class="update-time-btn">刷新/查询</a>
+                </span>
+            </h2>
             <table>
                 <tr class="loading">
                     <td>
