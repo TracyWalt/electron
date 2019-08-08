@@ -18,14 +18,12 @@ module.exports = {
         let request = net.request(`http://172.16.4.2/api/spent_on_tasks?dept=前端开发平台&from=${S.startDate}&to=${S.endDate}`)
         request.on('response', (response) => {
             response.on('data', (chunk) => {
+                S.D.table.style.opacity = '1'
                 data.push(chunk)
             })
             response.on('end', () => {
                 S.createList(data && JSON.parse(data.join('')))
             })
-        })
-        request.on('error', () => {
-            S.D.table.style.opacity = '1'
         })
         request.end()     
     },
