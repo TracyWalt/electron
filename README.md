@@ -8,6 +8,6 @@
 2/ 升级 powershell 3.0 +  和  .net framework 4.5 +
 
 
-3/ 打包成 exe安装包
+3/ 打包成 exe安装包 
 
 	[https://segmentfault.com/a/1190000016707052](https://segmentfault.com/a/1190000016707052)
