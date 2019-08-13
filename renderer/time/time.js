@@ -190,7 +190,7 @@ module.exports = {
         return str
     },
     addZreo(num) {
-        return num*1 >= 10 ? `''${num}` : `0${num}`
+        return num*1 >= 10 ? `${'' + num}` : `0${num}`
     },
     update() {
         const S = this
