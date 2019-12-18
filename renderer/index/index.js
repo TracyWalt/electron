@@ -72,13 +72,13 @@ let index = {
                 e.target.className = 'active'
 
                 // gbeta目录下是否还有 www目录
-                let __url = `${S.rootDir}${e.target.innerHTML}/applications/banggood/templates/black/web`
+                let __url = `${S.rootDir}${e.target.innerHTML}/applications/banggood/templates/black/`
                 let www = fs.readdirSync(`${S.rootDir}${e.target.innerHTML}`)[0]
                 if(www == 'www'){
-                    __url = `${S.rootDir}${e.target.innerHTML}/www/applications/banggood/templates/black/web`
+                    __url = `${S.rootDir}${e.target.innerHTML}/www/applications/banggood/templates/black/`
                 }
                 S.D.root.value = __url
-                __url += '/dev/entry/'
+                __url += 'web/dev/entry/'
 
                 // 动态生成模块列表
                 let moduleFolder = filelist.getFileList(__url)
@@ -133,15 +133,15 @@ let index = {
                 if (clsName.indexOf('active') != -1) {
                     // 新工程本地开发启动
                     if(clsName.indexOf('start-btn') != -1){
-                        path += `&&npm run start -tpl=${S.D.module.value}`
+                        path += `web&&npm run start -tpl=${S.D.module.value}`
                     }
                     // 新工程sprite
                     if(clsName.indexOf('sprite-btn') != -1){
-                        path += `&&npm run sprite`
+                        path += `web&&npm run sprite`
                     }
                     // 新工程build
                     if(clsName.indexOf('build-btn') != -1){
-                        path += `&&npm run build`
+                        path += `web&&npm run build`
                     }
                     // 旧工程详情页build
                     if(clsName.indexOf('build-detail-btn') != -1){
