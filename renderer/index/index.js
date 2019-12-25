@@ -21,6 +21,7 @@ let index = {
         'entryVal': document.querySelector('.entry-val'),
         'entryBtn': document.querySelector('.entry-btn'),
         'entrySuc': document.querySelector('.entry-success'),
+        'entryError': document.querySelector('.entry-dialog .error'),
     },
     init() {
         router.init()
@@ -237,10 +238,13 @@ let index = {
                     console.log(`创建scss文件成功:${devEntryPath}${pathArr[0]}/css/${pathArr[1] || pathArr[0]}.scss`)
                 }
                 S.D.entryDialog.style.display = 'none'
+                S.D.entryError.style.display = 'none'
                 S.D.entrySuc.style.display = 'block'
                 setTimeout(() => {
                     S.D.entrySuc.style.display = 'none'
                 }, 2000)
+            } else {
+                S.D.entryError.style.display = 'block'
             }
         }
         S.D.entryMask.onclick = function () {
