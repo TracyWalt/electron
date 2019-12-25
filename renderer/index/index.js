@@ -16,6 +16,11 @@ let index = {
         'moduleUl': document.querySelector('.module-list'),
         'oBtnAll': document.querySelectorAll('.btn'),
         'moduleFilterInput': document.querySelector('.module-filter'),
+        'entryDialog': document.querySelector('.entry-dialog'),
+        'entryMask': document.querySelector('.entry-dialog .mask'),
+        'entryVal': document.querySelector('.entry-val'),
+        'entryBtn': document.querySelector('.entry-btn'),
+        'entrySuc': document.querySelector('.entry-success'),
     },
     init() {
         router.init()
@@ -151,11 +156,96 @@ let index = {
                     if(clsName.indexOf('build-search-btn') != -1){
                         path += `search&&npm run build`
                     }
+                    // 查看文档
+                    if(clsName.indexOf('doc-btn') != -1){
+                        path += `web&&npm run doc`
+                    }
+                    // stylelint fix
+                    if(clsName.indexOf('stylelint-btn') != -1){
+                        path += `web&&npm run stylelint`
+                    }
+                    // eslint fix
+                    if(clsName.indexOf('eslint-btn') != -1){
+                        path += `web&&npm run lint`
+                    }
+                    // 新建入口弹窗
+                    if(clsName.indexOf('newentry-btn') != -1){
+                        S.D.entryDialog.style.display = 'block'
+                    } else {
+                        child_process.exec(`start cmd.exe /K "cd /d ${path}"`)
+                    }
                     console.log(path)
-                    child_process.exec(`start cmd.exe /K "cd /d ${path}"`)
                 }
             }
         })
+
+        // 新建入口
+        S.D.entryBtn.onclick = function () {
+            let val = S.D.entryVal.value
+            if (val) {
+                let rootPath = `${S.D.root.value}web/`
+                let pathArr = val.split('/')
+                let templatesPath = `${rootPath}templates/`
+                let devEntryPath = `${rootPath}dev/entry/`
+                // 创建模板文件夹
+                if (!fs.existsSync(`${templatesPath}${pathArr[0]}`)) {
+                    // 不存在则创建
+                    fs.mkdirSync(`${templatesPath}${pathArr[0]}`)
+                }
+                // 创建入口文件夹
+                if (!fs.existsSync(`${devEntryPath}${pathArr[0]}`)) {
+                    // 不存在则创建
+                    fs.mkdirSync(`${devEntryPath}${pathArr[0]}`)
+                    // 同时创建 css img 文件夹
+                    fs.mkdirSync(`${devEntryPath}${pathArr[0]}/css`)
+                    fs.mkdirSync(`${devEntryPath}${pathArr[0]}/img`)
+                }
+
+                // 创建模板文件
+                let filePath = pathArr.length > 1 ? val : `${val}/${val}`
+                try {
+                    // 入口文件路径存在
+                    fs.statSync(`${templatesPath}${filePath}.html`)
+                } catch (error) {
+                    // 不存在则创建
+                    fs.writeFileSync(`${templatesPath}${filePath}.html`, '', {'flag': 'w'}, (err) => {
+                        if (err) {
+                            console.log('模板 文件写入失败')
+                        }
+                    })
+                    console.log(`创建html文件成功:${templatesPath}${filePath}.html`)
+                }
+
+                // 创建入口文件
+                try {
+                    // 入口文件路径存在
+                    fs.statSync(`${devEntryPath}${filePath}.js`)
+                } catch (error) {
+                    // 不存在则创建
+                    fs.writeFileSync(`${devEntryPath}${filePath}.js`, '', {'flag': 'w'}, (err) => {
+                        if (err) {
+                            console.log('入口js 文件写入失败')
+                        }
+                    })
+                    console.log(`创建js文件成功:${devEntryPath}${filePath}.js`)
+
+                    fs.writeFileSync(`${devEntryPath}${pathArr[0]}/css/${pathArr[1] || pathArr[0]}.scss`, '', {'flag': 'w'}, (err) => {
+                        if (err) {
+                            console.log('入口css 文件写入失败')
+                        }
+                    })
+                    console.log(`创建scss文件成功:${devEntryPath}${pathArr[0]}/css/${pathArr[1] || pathArr[0]}.scss`)
+                }
+                S.D.entryDialog.style.display = 'none'
+                S.D.entrySuc.style.display = 'block'
+                setTimeout(() => {
+                    S.D.entrySuc.style.display = 'none'
+                }, 2000)
+            }
+        }
+        S.D.entryMask.onclick = function () {
+            S.D.entryDialog.style.display = 'none'
+        }
     },
 }
 
