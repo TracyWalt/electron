@@ -24,15 +24,21 @@ let template = [
         },
     },
     {
-        label: '设置',
-        click: function(){
-            win.webContents.send('clickSetting')
-        },
-    },
-    {
         label: '工时',
         click: function(){
             win.webContents.send('clickTime')
+        },
+    },
+    {
+        label: '任务',
+        click: function(){
+            win.webContents.send('clickTask')
+        },
+    },
+    {
+        label: '设置',
+        click: function(){
+            win.webContents.send('clickSetting')
         },
     },
 ]

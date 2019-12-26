@@ -7,7 +7,7 @@
     <title>CmdSprite</title>
 </head>
 <body>
-    
+    <!-- 命令模块 -->
     <div class="main-cnt main-cnt-dev">
         <div class="block">
             <h2>请选择环境：</h2>
@@ -31,6 +31,7 @@
             <a href="javascript:;" class="btn build-search-btn">搜索页 build</a>
         </div>
     </div>
+    <!-- 设置模块 -->
     <div class="main-cnt main-cnt-setting">
         <div class="block">
             <h2>设置根目录</h2>
@@ -48,7 +49,8 @@
             </div>
         </div>
     </div>
-    <div class="main-cnt main-cnt-time">
+    <!-- 花费模块 -->
+    <div class="main-cnt main-cnt-list main-cnt-time">
         <div class="block">
             <h2>
                 每日花费
@@ -67,6 +69,27 @@
             </table>
         </div>
     </div>
+    <!-- 已完成任务模块 -->
+    <div class="main-cnt main-cnt-list main-cnt-task">
+        <div class="block">
+            <h2>
+                已完成任务
+                <span>
+                    <input type="text" class="name" value="杨智富" placeholder="处理人">-<input type="text" class="start-time" placeholder="开始时间">-<input type="text" class="end-time" placeholder="结束时间">
+                    <a href="javascript:;" class="update-time-btn">刷新/查询</a>
+                </span>
+            </h2>
+            <table>
+                <tr class="loading">
+                    <td>
+                        <img src="static/images/loading.gif">
+                        <p>玩命加载中,请稍等...</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- 新建入口弹窗 -->
     <div class="entry-dialog">
         <div class="mask"></div>
         <div class="cont">
@@ -75,7 +98,8 @@
             <div class="error">请输入模块名称</div>
         </div>
     </div>
-    <div class="entry-success"><span>创建成功</span></div>
+    <div class="entry-success"><span></span></div>
+
     <link rel="stylesheet" href="renderer/index/index.css">
     <script src="renderer/index/index.js"></script>
 </body>

@@ -239,6 +239,7 @@ let index = {
                 }
                 S.D.entryDialog.style.display = 'none'
                 S.D.entryError.style.display = 'none'
+                S.D.entrySuc.innerHTML = '<span>创建成功</span>'
                 S.D.entrySuc.style.display = 'block'
                 setTimeout(() => {
                     S.D.entrySuc.style.display = 'none'
@@ -249,6 +250,7 @@ let index = {
         }
         S.D.entryMask.onclick = function () {
             S.D.entryDialog.style.display = 'none'
+            S.D.entryError.style.display = 'none'
         }
     },
 }

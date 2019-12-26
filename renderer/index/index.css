@@ -125,12 +125,12 @@ ul {
     text-decoration: none;
 }
 
-.main-cnt-time .block {
+.main-cnt-list .block {
     overflow: auto;
     position: relative;
 }
 
-.main-cnt-time table {
+.main-cnt-list table {
     border-spacing: 0;
     width: 100%;
     table-layout: auto;
@@ -139,13 +139,13 @@ ul {
     font-size: 12px;
 }
 
-.main-cnt-time table tr td:first-child,
-.main-cnt-time table tr th:first-child {
+.main-cnt-list table tr td:first-child,
+.main-cnt-list table tr th:first-child {
     text-align: left;
 }
 
-.main-cnt-time table td,
-.main-cnt-time table th {
+.main-cnt-list table td,
+.main-cnt-list table th {
     padding: 4px 5px;
     height: 18px;
     line-height: 18px;
@@ -157,40 +157,40 @@ ul {
     font-weight: normal;
 }
 
-.main-cnt-time table th {
+.main-cnt-list table th {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #efefef;
     background-color: #f7f7f7;
     color: #666;
 }
 
-.main-cnt-time table tr:hover {
+.main-cnt-list table tr:hover {
     background-color: #f7f7f7;
 }
 
-.main-cnt-time table th, .main-cnt-time table td {
+.main-cnt-list table th, .main-cnt-list table td {
     border: 1px solid #ddd;
     min-width: 40px;
     color: #000000;
 }
 
-.main-cnt-time table tr.loading td{
+.main-cnt-list table tr.loading td{
     padding: 0;
     border: 0 none;
     text-align: center;
     font-size: 16px;
 }
 
-.main-cnt-time table tr.loading:hover {
+.main-cnt-list table tr.loading:hover {
     background: none;
 }
 
-.main-cnt-time .block h2 {
+.main-cnt-list .block h2 {
     position: relative;
     line-height: 24px;
 }
 
-.main-cnt-time .block h2 span {
+.main-cnt-list .block h2 span {
     position: absolute;
     right: 0;
     top: 0;
@@ -200,7 +200,7 @@ ul {
     font-weight: normal;
 }
 
-.main-cnt-time .block h2 input {
+.main-cnt-list .block h2 input {
     height: 22px;
     line-height: 22px;
     border: 1px solid #ccc;
@@ -212,7 +212,7 @@ ul {
     font-size: 12px;
 }
 
-.main-cnt-time .update-time-btn {
+.main-cnt-list .update-time-btn {
     color: #fff;
     height: 24px;
     line-height: 24px;
