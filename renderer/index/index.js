@@ -44,6 +44,8 @@ let index = {
         
             let oLi = ''
             let folderArr = S.folder.split(';')
+            // 保存环境列表，供其他模块使用
+            let roodirArr = []
             newFiles.map((item) => {
                 // 过滤非目标文件夹
                 if(S.folder){
@@ -56,11 +58,14 @@ let index = {
                     })
                     if (!isHas) {      
                         oLi += `<li>${item}</li>`
+                        roodirArr.push(item)
                     }
                 }else{
                     oLi += `<li>${item}</li>`
+                    roodirArr.push(item)
                 }
             })
+            localStorage.setItem('roodirArr', roodirArr.join(','))
             S.D.rootUl.innerHTML = oLi   
         })
     },
@@ -76,7 +81,8 @@ let index = {
                     rootList[i].className = ''
                 }
                 e.target.className = 'active'
-
+                // 保存当前选择的环境，提供给其他模块使用
+                localStorage.setItem('rootDir', `${S.rootDir}${e.target.innerHTML}`)
                 // gbeta目录下是否还有 www目录
                 let __url = `${S.rootDir}${e.target.innerHTML}/applications/banggood/templates/black/`
                 let www = fs.readdirSync(`${S.rootDir}${e.target.innerHTML}`)[0]

@@ -71,7 +71,7 @@
     </div>
     <!-- 已完成任务模块 -->
     <div class="main-cnt main-cnt-list main-cnt-task">
-        <div class="block">
+        <div class="block task-block">
             <h2>
                 已完成任务
                 <span>
@@ -85,6 +85,28 @@
                         <img src="static/images/loading.gif">
                         <p>玩命加载中,请稍等...</p>
                     </td>
+                </tr>
+            </table>
+        </div>
+        <div class="block git-block">
+            <h2>
+                git修改文件列表
+                <span>
+                    <a href="javascript:;" class="copy-list-btn">复制文件列表</a>
+                </span>
+                <div class="main-select git-list-select">
+                    <div class="select-text">请选择环境</div>
+                    <dl class="select-list">
+                    </dl>
+                </div>
+            </h2>
+            <table>
+                <tr>
+                    <th>路径</th>
+                    <th>状态</th>
+                </tr>
+                <tr>
+                    <td colspan="2" class="init">暂无修改文件</td>
                 </tr>
             </table>
         </div>

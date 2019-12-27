@@ -24,6 +24,29 @@ ul {
     overflow: hidden;
 }
 
+.main-cnt .git-block {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 200px;
+}
+
+.main-cnt .git-block table td.a {
+    color: #269a55;
+}
+
+.main-cnt .git-block table td.m {
+    color: #ec7612;
+}
+
+.main-cnt .git-block table td.d {
+    color: red;
+}
+
+.main-cnt .git-block table td.init {
+    height: 50px;
+    text-align: center;
+}
+
 .main-cnt .block h2 {
     font-size: 14px;
     margin-bottom: 10px;
@@ -185,6 +208,20 @@ ul {
     background: none;
 }
 
+.main-cnt-list table td.aleft {
+    text-align: left;
+}
+
+.main-cnt-list table td a {
+    color: #666;
+    text-decoration: none;
+}
+
+.main-cnt-list table td a:hover {
+    text-decoration: underline;
+    color: #269a55;
+}
+
 .main-cnt-list .block h2 {
     position: relative;
     line-height: 24px;
@@ -212,6 +249,7 @@ ul {
     font-size: 12px;
 }
 
+.main-cnt-list .copy-list-btn,
 .main-cnt-list .update-time-btn {
     color: #fff;
     height: 24px;
@@ -223,6 +261,73 @@ ul {
     text-decoration: none;
     font-size: 12px;
     font-weight: normal;
+}
+
+.main-select {
+    width: 150px;
+    display: inline-block;
+    position: relative;
+    font-weight: normal;
+    margin: 0 20px;
+    font-size: 12px;
+}
+
+.main-select:after {
+    content: '';
+    font-size: 0;
+    height: 0;
+    width: 0;
+    line-height: 0;
+    border-width: 4px;
+    border-style: solid;
+    border-color: #666 transparent transparent transparent;
+    position: absolute;
+    right: 10px;
+    top: 13px;
+}
+
+.main-select .select-text {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    color: #333;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 3px 3px 0 0;
+    box-sizing: border-box;
+    background: #f7f7f7;
+    text-indent: 10px;
+    cursor: pointer;
+}
+
+.main-select .select-list {
+    position: absolute;
+    left: 0;
+    top: 29px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 3px 3px;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 1;
+    background: #fff;
+    display: none;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.main-select .select-list dd {
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    color: #666;
+    text-indent: 10px;
+}
+
+.main-select .select-list dd.active,
+.main-select .select-list dd:hover {
+    background: #f7f7f7;
+    color: #333;
+    cursor: pointer;
 }
 
 .entry-dialog {
