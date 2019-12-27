@@ -93,7 +93,7 @@ module.exports = {
             S.params.startDate = S.D.startTimeInput.value
             S.params.endDate = S.D.endTimeInput.value
             S.ajaxData()
-            S.D.table.style.opacity = '0.6'
+            S.D.taskTable.style.opacity = '0.6'
         }
     },
     copy() {
