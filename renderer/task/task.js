@@ -164,6 +164,7 @@ module.exports = {
     },
     updateGitlist(path) {
         const S = this
+        S.gitFile = []
         getGitList.getlist(S.rootDir+path, (list) => {
             // 绘制表头
             let tr = '<th>路径</th><th>状态</th>'
@@ -172,26 +173,24 @@ module.exports = {
             let zhName = {
                 'D': '删除',
                 'M': '修改',
-                'R': '修改',
+                'R': '新增',
                 'A': '新增',
                 '??': '新增'
             }
             let clsName = {
                 'D': 'd',
                 'M': 'm',
-                'R': 'm',
+                'R': 'a',
                 'A': 'a',
                 '??': 'a'
             }
             list.forEach((item,index) => {
-                item.list.forEach((v,k) => {
-                    td += '<tr>'
-                    td += '<td class="'+clsName[item.type]+'"><span>'+v+'</span></td>'
-                    td += '<td class="'+clsName[item.type]+'"><span>'+zhName[item.type]+'</span></td>'
-                    td += '</tr>'
+                td += '<tr>'
+                td += '<td class="'+clsName[item.type]+'"><span>'+item.list+'</span></td>'
+                td += '<td class="'+clsName[item.type]+'"><span>'+zhName[item.type]+'</span></td>'
+                td += '</tr>'
 
-                    S.gitFile.push(v)
-                })
+                S.gitFile.push(item.list)
             })
             if(!td){
                 td += '<tr><td colspan="2" class="init">暂无修改文件</td></tr>'

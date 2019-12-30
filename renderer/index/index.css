@@ -27,7 +27,7 @@ ul {
 .main-cnt .git-block {
     margin-top: 20px;
     width: 100%;
-    min-height: 200px;
+    min-height: 250px;
 }
 
 .main-cnt .git-block table td.a {
@@ -311,7 +311,7 @@ ul {
     z-index: 1;
     background: #fff;
     display: none;
-    max-height: 100px;
+    max-height: 210px;
     overflow-y: auto;
 }
 
