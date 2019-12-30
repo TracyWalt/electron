@@ -23,7 +23,8 @@ module.exports = {
         let date = new Date()
         let year = date.getFullYear()
         let month = date.getMonth()+1
-        let day = date.getDate()
+        // 获取当月最后一天
+        let day = new Date(year, month, 0).getDate() 
         let curStartTime = `${year}-${S.addZreo(month)}-01`
         let curEndTime = `${year}-${S.addZreo(month)}-${S.addZreo(day)}`
         S.D.startTimeInput.value = curStartTime

@@ -37,7 +37,8 @@ module.exports = {
         let date = new Date()
         let year = date.getFullYear()
         let month = date.getMonth()+1
-        let day = date.getDate()
+        // 获取当月最后一天
+        let day = new Date(year, month, 0).getDate() 
         let curStartTime = `${year}-${S.addZreo(month)}-01`
         let curEndTime = `${year}-${S.addZreo(month)}-${S.addZreo(day)}`
         S.D.startTimeInput.value = curStartTime
@@ -66,16 +67,22 @@ module.exports = {
     },
     createList(data) {
         const S = this
+        // 按日期升序排序
+        data.rows = data.rows.sort((a, b) => {
+            return b.plan_enddate.replace(/-/g,'') - a.plan_enddate.replace(/-/g,'')
+        })
+        console.log(data)
         if(data && data.rows.length > 0){
             // 绘制表头
-            let tr = '<th>任务</th><th>需求</th><th>处理人</th><th>操作</th>'
+            let tr = '<th>任务</th><th>需求</th><th>完成日期</th><th>处理人</th><th>操作</th>'
             // 绘制列表
             let td = ''
             data.rows.forEach((item,index) => {
                 td += '<tr>'
                 td += '<td class="aleft"><a href="javascript:;" class="open-link" data-url="'+item.task_url+'" target="_blank">'+item.task_name+'</a></td>'
                 td += '<td class="aleft"><a href="javascript:;" class="open-link" data-url="'+item.story_url+'" target="_blank">'+item.story_name+'</a></td>'
-                td += '<td>'+item.handler+'</td>'
+                td += '<td class="gray">'+item.plan_enddate+'</td>'
+                td += '<td class="gray">'+item.handler+'</td>'
                 td += '<td><a href="javascript:;" class="copy-url" data-task-name="'+item.task_name+'" data-story-tid="'+item.story_tid+'" data-task-url="'+item.task_url+'" data-story-url="'+item.story_url+'">复制源码关键字</a></td>'
                 td += '</tr>'
             })

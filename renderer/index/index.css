@@ -47,6 +47,10 @@ ul {
     text-align: center;
 }
 
+.main-cnt .block table td.gray {
+    color: #666;
+}
+
 .main-cnt .block h2 {
     font-size: 14px;
     margin-bottom: 10px;
