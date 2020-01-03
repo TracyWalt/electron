@@ -58,6 +58,25 @@ let FileList = {
     getConfigPath() {
         return cfg.config.cfgPath
     },
+    // 删除目录和目录下的所有文件
+    deleteall(path) {
+        const S = this
+        let files = []
+        if(fs.existsSync(path)) {
+            files = fs.readdirSync(path)
+            files.forEach(function(file, index) {
+                let curPath = path + '/' + file
+                if(fs.statSync(curPath).isDirectory()) {
+                    // recurse
+                    S.deleteall(curPath)
+                } else {
+                    // delete file
+                    fs.unlinkSync(curPath)
+                }
+            });
+            fs.rmdirSync(path)
+        }
+    },
 }
 
 FileList.createConfig()

@@ -163,8 +163,11 @@ module.exports = {
 
             // 插入数据
             S.D.table.innerHTML = tr + td
-            S.D.table.style.opacity = '1'
+            
+        } else {
+            S.D.table.innerHTML = '<tr><th>开发人员</th><th>总价</th></tr><tr><td colspan="2" class="init">暂无数据</td></tr>'
         }
+        S.D.table.style.opacity = '1'
     },
     formatWeek(num) {
         let str = ''

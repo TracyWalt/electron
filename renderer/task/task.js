@@ -72,11 +72,11 @@ module.exports = {
             return b.plan_enddate.replace(/-/g,'') - a.plan_enddate.replace(/-/g,'')
         })
         console.log(data)
+        // 绘制表头
+        let tr = '<th>任务</th><th>需求</th><th>完成日期</th><th>处理人</th><th>操作</th>'
+        // 绘制列表
+        let td = ''
         if(data && data.rows.length > 0){
-            // 绘制表头
-            let tr = '<th>任务</th><th>需求</th><th>完成日期</th><th>处理人</th><th>操作</th>'
-            // 绘制列表
-            let td = ''
             data.rows.forEach((item,index) => {
                 td += '<tr>'
                 td += '<td class="aleft"><a href="javascript:;" class="open-link" data-url="'+item.task_url+'" target="_blank">'+item.task_name+'</a></td>'
@@ -86,10 +86,13 @@ module.exports = {
                 td += '<td><a href="javascript:;" class="copy-url" data-task-name="'+item.task_name+'" data-story-tid="'+item.story_tid+'" data-task-url="'+item.task_url+'" data-story-url="'+item.story_url+'">复制源码关键字</a></td>'
                 td += '</tr>'
             })
-            // 插入数据
-            S.D.taskTable.innerHTML = tr + td
-            S.D.taskTable.style.opacity = '1'
+            
+        } else {
+            td = '<tr><td colspan="5" class="init">暂无数据</td></tr>'
         }
+        // 插入数据
+        S.D.taskTable.innerHTML = tr + td
+        S.D.taskTable.style.opacity = '1'
     },
     addZreo(num) {
         return num*1 >= 10 ? `${'' + num}` : `0${num}`

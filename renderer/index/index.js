@@ -183,6 +183,16 @@ let index = {
                     }
                     console.log(path)
                 }
+
+                // 删除文件夹 C:\Users\Administrator\AppData\Roaming\Scooter Software
+                if(clsName.indexOf('reset-bcompare-btn') != -1) {
+                    filelist.deleteall('C:/Users/Administrator/AppData/Roaming/Scooter Software')
+                    S.D.entrySuc.innerHTML = '<span>删除目录（C:/Users/Administrator/AppData/Roaming/Scooter Software）成功</span>'
+                    S.D.entrySuc.style.display = 'block'
+                    setTimeout(() => {
+                        S.D.entrySuc.style.display = 'none'
+                    }, 2000)
+                }
             }
         })
 

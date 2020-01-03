@@ -42,7 +42,7 @@ ul {
     color: red;
 }
 
-.main-cnt .git-block table td.init {
+.main-cnt .block table td.init {
     height: 50px;
     text-align: center;
 }
@@ -104,6 +104,12 @@ ul {
 .main-cnt .block-btn a.active {
     cursor: pointer;
     background: #269a55;
+}
+
+.main-cnt .block-btn a.reset-bcompare-btn {
+    color: #fff;
+    background: red;
+    cursor: pointer;
 }
 
 .settings {
