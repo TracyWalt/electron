@@ -31,6 +31,21 @@ module.exports = {
         S.D.endTimeInput.value = curEndTime
         S.params.startDate = curStartTime
         S.params.endDate = curEndTime
+
+        // 初始化日历
+        layui.use('laydate', () => {
+            let laydate = layui.laydate
+
+            laydate.render({
+                elem: '#timeStime',
+                theme: '#269a55'
+            })
+
+            laydate.render({
+                elem: '#timeEtime',
+                theme: '#269a55'
+            })
+        })
     },
     ajaxData() {
         const S = this

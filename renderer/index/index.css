@@ -85,6 +85,10 @@ ul {
     background: #269a55;
 }
 
+.main-cnt .block-btn {
+    font-size: 0;
+}
+
 .main-cnt .block-btn a {
     display: inline-block;
     padding: 0 20px;
@@ -95,6 +99,7 @@ ul {
     color: #fff;
     text-decoration: none;
     font-size: 12px;
+    margin: 0 10px 10px 0;
 }
 
 .main-cnt .block-btn a {

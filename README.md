@@ -11,3 +11,12 @@
 3/ 打包成 exe安装包
 
 	[https://segmentfault.com/a/1190000016707052](https://segmentfault.com/a/1190000016707052)
+
+4/ VNSEdit 打包器 NSIS编辑向导VNISEdit无语言选择问题
+
+	在VNISEdit中 按快捷键 Ctrl +F11 在配置页面中 ,需正确配置  编译器路径 和  帮助路径 
+
+
+5/ UI组件
+
+	https://www.layui.com/
