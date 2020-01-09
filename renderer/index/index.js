@@ -142,7 +142,7 @@ let index = {
             item.onclick = () => {
                 let clsName = item.className
                 let path = S.D.root.value
-                if (clsName.indexOf('active') != -1) {
+                if (clsName.indexOf('active') != -1 && clsName.indexOf('reset-bcompare-btn') == -1) {
                     // 新工程本地开发启动
                     if(clsName.indexOf('start-btn') != -1){
                         path += `web&&npm run start -tpl=${S.D.module.value}`
