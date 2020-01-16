@@ -98,7 +98,7 @@ module.exports = {
                 td += '<td class="aleft"><a href="javascript:;" class="open-link" data-url="'+item.story_url+'" target="_blank">'+item.story_name+'</a></td>'
                 td += '<td class="gray">'+item.plan_enddate+'</td>'
                 td += '<td class="gray">'+item.handler+'</td>'
-                td += '<td><a href="javascript:;" class="copy-url" data-task-name="'+item.task_name+'" data-story-tid="'+item.story_tid+'" data-task-url="'+item.task_url+'" data-story-url="'+item.story_url+'">复制源码关键字</a></td>'
+                td += '<td><a href="javascript:;" class="copy-url" data-task-name="'+item.task_name+'" data-task-id="'+item.task_id+'" data-story-tid="'+item.story_tid+'" data-task-url="'+item.task_url+'" data-story-url="'+item.story_url+'">复制源码关键字</a></td>'
                 td += '</tr>'
             })
             
@@ -129,9 +129,8 @@ module.exports = {
             if (e.target.className == 'copy-url') {
                 let taskUrl = e.target.getAttribute('data-task-url')
                 let taskName = e.target.getAttribute('data-task-name').substring(0, 12)
-                let storyTid = taskUrl.replace(/.*\/(\d+)$/,'$1')
-                storyTid = storyTid.substring(storyTid.length-7)
-                let sourceText = `--task=${storyTid} --user=${S.params.name} ${taskName}... ${taskUrl}`
+                let taskId = e.target.getAttribute('data-task-id')
+                let sourceText = `--task=${taskId} --user=${S.params.name} ${taskName}... ${taskUrl}`
                 clipboard.writeText(sourceText)
                 S.D.entrySuc.innerHTML = '<span>已复制到粘贴板</span>'
                 S.D.entrySuc.style.display = 'block'
